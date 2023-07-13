@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import logging
 from aiogram import Bot, Dispatcher, executor, types
-from deep_translator import GoogleTranslator
+import wikipedia
 
 load_dotenv()
 TOKEN = os.getenv("API_TOKEN")
@@ -19,10 +19,10 @@ async def send_welcome(message: types.Message):
 
 
 @dp.message_handler()
-async def echo(message: types.Message):
+async def sendWiki(message: types.Message):
     try:
-        translated = GoogleTranslator(source='auto', target='uz').translate(message.text)
-        await message.answer(translated)
+        respond = wikipedia.summary(message.text)
+        await message.answer(respond)
     except:
         await message.answer("Not found. 😔")
 
