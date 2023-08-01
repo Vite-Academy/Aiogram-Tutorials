@@ -30,6 +30,11 @@ async def sticker_handler(msg: types.Message) -> None:
     await msg.answer(type(msg))
     await msg.answer_sticker(sticker=msg.sticker.file_id)
 
+@dp.message_handler(content_types='photo')
+async def photo_handler(msg: types.Message) -> None:
+    await msg.answer(type(msg))
+    # print(msg)
+
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
