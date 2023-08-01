@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import logging
 from aiogram import Bot, Dispatcher, executor, types
 
-load_dotenv(".env")
+load_dotenv()
 TOKEN = os.getenv("API_TOKEN")
 
 logging.basicConfig(level=logging.INFO)
