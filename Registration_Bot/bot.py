@@ -13,36 +13,35 @@ bot = Bot(token = TOKEN)
 dp = Dispatcher(bot)
 
 
-# conn = sqlite3.connect('db.sqlite3', check_same_thread=False)
-# cursor = conn.cursor()
+conn = sqlite3.connect('db.sqlite3', check_same_thread=False)
+cursor = conn.cursor()
 
-# conn.execute('''
-# CREATE USERS contact(
-#          ENG TEXT NOT NULL,
-#          RU  TEXT NOT NULL,
-#          UZ  TEXT NOT NULL
-#         );
-#          ''')
-
-# def db_table_val(user_id: int, user_name: str, user_surname: str, username: str):
-#     cursor.execute('INSERT INTO USERS (user_id, user_name, user_surname, username) VALUES (?, ?, ?, ?)',
-#                    (user_id, user_name, user_surname, username))
-#     conn.commit()
+conn.execute('''
+        CREATE TABLE IF NOT EXISTS USERS (
+            ID INTEGER NOT NULL PRIMARY KEY,
+            FIRST_NAME  TEXT NOT NULL,
+            USERNAME TEXT NOT NULL
+        );
+    ''')
     
 
 @dp.message_handler(commands=['start', 'help'])
-async def send_welcome(message: types.Message):
-    await message.answer('Hi')
+async def send_welcome(msg: types.Message):
+    await msg.answer('Hi')
 
+    id = msg.from_user.id
+    first_name = msg.from_user.first_name
+    username = msg.from_user.username
     
-    # print(message)
-    # print(type(message.text)) # Message text: /start <class 'str'>
-    # print(type(message.from_user)) # User data: {"id": 1222915427, "is_bot": false, "first_name": "Shakhzod Tojiyev", "username": "shakhzod_tojiyev", "language_code": "en"} <class 'aiogram.types.user.User'>
-    # print(type(message.from_id)) # User ID: 1222915427 <class 'int'>
-    # print(type(message.message_id)) # Message ID: 102 <class 'int'>
+    cursor.execute(f'''
+                   INSERT INTO USERS (ID, FIRST_NAME, USERNAME) 
+                   VALUES ('{id}', '{first_name}', '{username}');
+        ''')
+    conn.commit()
+
 	
     
-
+# @dp.message_handler()
 
 
 if __name__ == '__main__':

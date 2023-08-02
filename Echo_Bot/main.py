@@ -25,6 +25,11 @@ async def send_welcome(message: types.Message):
 @dp.message_handler()
 async def echo(message: types.Message):
     await message.answer(message.text)
+    # print(message)
+    # print(type(message.text)) # Message text: /start <class 'str'>
+    # print(type(message.from_user)) # User data: {"id": 1222915427, "is_bot": false, "first_name": "Shakhzod Tojiyev", "username": "shakhzod_tojiyev", "language_code": "en"} <class 'aiogram.types.user.User'>
+    # print(type(message.from_id)) # User ID: 1222915427 <class 'int'>
+    # print(type(message.message_id)) # Message ID: 102 <class 'int'>
 
 
 if __name__ == '__main__':
