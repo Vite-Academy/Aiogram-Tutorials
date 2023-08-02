@@ -22,9 +22,6 @@ async def send_welcome(message: types.Message):
 @dp.message_handler(commands=['screen'])
 async def screenshot(msg: types.Message) -> None:
     img = ImageGrab.grab()
-    if not os.path.exists('static'):
-        os.mkdir('static')
-    os.chdir('static')
     img_name = secrets.token_hex(8) + '.png'
     img.save(img_name, format='PNG')
 
