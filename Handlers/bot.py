@@ -1,7 +1,13 @@
+import asyncio
+import logging
+import sys
 import os
 from dotenv import load_dotenv
-import logging
-from aiogram import Bot, Dispatcher, executor, types
+from aiogram import Bot, Dispatcher, Router, types
+from aiogram.enums import ParseMode
+from aiogram.filters import CommandStart
+from aiogram.types import Message
+from aiogram.utils.markdown import hbold
 
 load_dotenv()
 TOKEN = os.getenv("API_TOKEN")
@@ -36,5 +42,11 @@ async def photo_handler(msg: types.Message) -> None:
     # print(msg)
 
 
-if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+async def main() -> None:
+    bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
+    await dp.start_polling(bot)
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    asyncio.run(main())

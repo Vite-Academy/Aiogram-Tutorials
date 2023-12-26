@@ -28,6 +28,7 @@ async def echo_handler(message: types.Message) -> None:
         await message.answer("Nice try!")
 
 
+
 async def main() -> None:
     bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
     await dp.start_polling(bot)
