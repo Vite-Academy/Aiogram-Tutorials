@@ -7,13 +7,14 @@ from aiogram import Bot, Dispatcher, Router, types
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message
-from aiogram.utils.markdown import hbold
 import wikipedia
 
+# Bot token can be obtained via https://t.me/BotFather
 # From .env import API_TOKEN value
 load_dotenv()
 TOKEN = getenv("API_TOKEN")
 
+# All handlers should be attached to the Router (or Dispatcher)
 dp = Dispatcher()
 
 @dp.message(CommandStart())
