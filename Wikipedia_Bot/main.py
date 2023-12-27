@@ -10,10 +10,11 @@ from aiogram.types import Message
 from aiogram.utils.markdown import hbold
 import wikipedia
 
+# From .env import API_TOKEN value
 load_dotenv()
 TOKEN = getenv("API_TOKEN")
-dp = Dispatcher()
 
+dp = Dispatcher()
 
 @dp.message(CommandStart())
 async def send_welcome(message: Message):
